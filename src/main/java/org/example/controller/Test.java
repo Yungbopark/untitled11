@@ -15,7 +15,7 @@ public class Test {
 
 
     @Autowired
-private BoardMapper boardMapper;
+    private BoardMapper boardMapper;
 
     @RequestMapping("/")
     public String home() {
@@ -28,31 +28,33 @@ private BoardMapper boardMapper;
     @RequestMapping("/boardList.do")
     public String boardList(Model model) {
 
-        System.out.println("Test.boardList");
+        List<Board> list = boardMapper.getLists();
 
-        List<Board> lists = boardMapper.getLists();
-
-        System.out.println("lists = " + lists.size());
+        model.addAttribute("list", list);
 
 
-
-        return "";
+        return "boardList";
 
 
         /*mybatis mapper  인식 불가 해결
-        * mapper xml 파일을 interface class의 package경로랑 똑같이,
-        * resource 폴더의 하위 폴더 구조로 동일하게 구성해 줌
-        * 그리고 나서 applicationContext.xml에서 dataSource를 인식 못하는 문제 발생
-        *
-        * 설정에서
-        *
-        * <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+         * mapper xml 파일을 interface class의 package경로랑 똑같이,
+         * resource 폴더의 하위 폴더 구조로 동일하게 구성해 줌
+         * 그리고 나서 applicationContext.xml에서 dataSource를 인식 못하는 문제 발생
+         *
+         * 설정에서
+         *
+         * <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 
-        * dataSource를 bean에 넣어주는 과정에서 초기화 필요
-        *
-        * <constructor-arg ref="hikariConfig"/>
-        *  */
+         * dataSource를 bean에 넣어주는 과정에서 초기화 필요
+         *
+         * <constructor-arg ref="hikariConfig"/>
+         *  */
+    }
+
+    @RequestMapping("/boardForm.do")
+    public String boardForm() {
 
 
+        return "";
     }
 }
