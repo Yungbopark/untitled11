@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--bean : 객체를 생성하는 태그-->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://146.56.178.189:3306/mysql"/>
+        <property name="username" value="root"/>
+        <property name="password" value="guseo101"/>
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+
+    <mybatis-spring:scan base-package="org/example/mapper"/>
+    <!--커넥션 메모리에 미리 커넥션을 만들어 놓음, 커넥선을 만들려면 hikari컨피그 필요함-->
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!--   스프링 제공 SqlSessionFactoryBean     -->
+    <!--   이미 만들어 놓은 Mapper Interface의 구현체를 내부적으로 만들기 위함     -->
+        <property name="dataSource" ref="dataSource"/>
+    <!--   dataSource가 ConnectionPool을 참조하고 있으니     -->
+    </bean>
+
+
+
+</beans>
