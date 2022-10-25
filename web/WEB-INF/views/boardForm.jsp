@@ -19,6 +19,7 @@
         <div class="panel-heading">BOARD</div>
         <div class="panel-body">
             <form action="boardInsert.do" method="post">
+<<<<<<< HEAD
             <table class="table">
                 <tr>
                     <td>제목</td>
@@ -40,6 +41,29 @@
                     </tr>
 
             </table>
+=======
+                <table class="table">
+                    <tr>
+                        <td>제목</td>
+                            <td><input type="text" name="title" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                            <td><textarea rows="7" class="form-control" name="content"></textarea> </td>
+                    </tr>
+                    <tr>
+                        <td>작성자</td>
+                        <td><input type="text" name="writer" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" class="btn btn-success btn-sm">등록</button>
+                            <button type="reset" class="btn btn-warning btn-sm">취소</button>
+                        </td>
+                    </tr>
+
+                </table>
+>>>>>>> 3070e82 ( dd)
             </form>
         </div>
         <div class="panel-footer">footer area</div>
