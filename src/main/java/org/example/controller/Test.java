@@ -56,7 +56,10 @@ public class Test {
 
     @PostMapping("/boardInsert.do")
     public String boardInsert(Board vo) { // 파라메터를 수집(board), 바로 VO를 파라메터로 걸면 됨
+        boardMapper.boardInsert(vo);
         return "redirect:boardList.do";
+
+
     }
 
 }

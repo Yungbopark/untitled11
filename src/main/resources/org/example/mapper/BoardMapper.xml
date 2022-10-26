@@ -6,4 +6,9 @@
     <select id="getLists" resultType="org.example.entity.Board">
         select * from tb_board order by idx desc
     </select>
+
+    <insert id="boardInsert" parameterType="org.example.entity.Board">
+        insert into tb_board(title,contents,writer)
+        values(#{title},#{contents},#{writer})
+    </insert>
 </mapper>
