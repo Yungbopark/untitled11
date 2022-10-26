@@ -6,6 +6,7 @@ import org.example.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -29,10 +30,7 @@ public class Test {
     public String boardList(Model model) {
 
         List<Board> list = boardMapper.getLists();
-
         model.addAttribute("list", list);
-
-
         return "boardList";
 
 
@@ -53,8 +51,12 @@ public class Test {
 
     @RequestMapping("/boardForm.do")
     public String boardForm() {
-
-
-        return "";
+        return "boardForm";
     }
+
+    @PostMapping("/boardInsert.do")
+    public String boardInsert(Board vo) { // 파라메터를 수집(board), 바로 VO를 파라메터로 걸면 됨
+        return "redirect:boardList.do";
+    }
+
 }

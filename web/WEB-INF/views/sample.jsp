@@ -14,35 +14,10 @@
 <body>
 
 <div class="container">
-    <h2>Sirng MVC01</h2>
+    <h2>Spring MVC01</h2>
     <div class="panel panel-default">
         <div class="panel-heading">BOARD</div>
-        <div class="panel-body">
-    <table class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>조회수</th>
-        </tr>
-        </thead>
-        <c:forEach var="vo" items = "${list}">
-
-        <tbody>
-        <tr>
-            <td>${vo.idx}</td>
-            <td>${vo.title}</td>
-            <td>${vo.writer}</td>
-            <td>${vo.indate}</td>
-            <td>${vo.count}</td>
-            </tr>
-        </tbody>
-        </c:forEach>
-    </table>
-    <a href="boardForm.do" class="btn btn-primary btn-small">글쓰기</a>
-</div>
+        <div class="panel-body"></div>
         <div class="panel-footer">footer area</div>
     </div>
 </div>
