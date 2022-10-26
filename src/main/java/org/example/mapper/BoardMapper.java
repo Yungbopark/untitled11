@@ -11,4 +11,6 @@ public interface BoardMapper {
     // 인터페이스 안에 추상 메서드로 정의 되어 있음
 
     public void boardInsert(Board vo);
+
+    public Board boardContent(int idx);
 }

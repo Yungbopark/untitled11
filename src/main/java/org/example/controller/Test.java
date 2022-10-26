@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -59,7 +60,16 @@ public class Test {
         boardMapper.boardInsert(vo);
         return "redirect:boardList.do";
 
+    }
 
+    @RequestMapping("boardContent.do")
+    public String boardContent(@RequestParam("idx") int idx, Model model) {
+        Board board = boardMapper.boardContent(idx);
+        model.addAttribute("board", board);
+
+        System.out.println("board.getContents() = " + board.getContents());
+                
+        return "boardContent";
     }
 
 }

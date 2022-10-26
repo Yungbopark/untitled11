@@ -11,4 +11,8 @@
         insert into tb_board(title,contents,writer)
         values(#{title},#{contents},#{writer})
     </insert>
+
+    <select id="boardContent" resultType="org.example.entity.Board">
+        select * from tb_board where idx = #{idx}
+    </select>
 </mapper>
