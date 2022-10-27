@@ -24,7 +24,7 @@
             <table class="table">
                 <tr>
                     <td>제목</td>
-                    <td><input type="text" name="title" class="form-control" value="${board.title}"/></td>
+                    <td>${board.title}</td>
                 </tr>
                 <tr>
                     <td>내용</td>
@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <td>작성자</td>
-                    <td><input type="text" name="writer" class="form-control" value="${board.writer}"/></td>
+                    <td>${board.writer}</td>
                 </tr>
                 <tr>
                     <td>작성일</td>
@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <a class="btn btn-primary btn-sm">수정화면</a>
+                        <a href="boardUpdateForm.do/${board.idx}" class="btn btn-primary btn-sm">수정화면</a>
                         <a href="boardDelete.do/${board.idx}" class="btn btn-warning btn-sm">삭제</a>
                         <%--뒤에 파라미터 담아서 보낼 때는 보통 ?idx=${board.idx}이런 식으로 보내는데,
                         뒤에 바로 경로 처럼 지정 할 수도 있음--%>

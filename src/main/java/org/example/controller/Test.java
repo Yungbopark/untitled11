@@ -1,15 +1,13 @@
 package org.example.controller;
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.example.entity.Board;
 import org.example.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -69,19 +67,38 @@ public class Test {
         model.addAttribute("board", board);
 
         System.out.println("board.getContents() = " + board.getContents());
-                
+
         return "boardContent";
     }
 
     @RequestMapping("/boardDelete.do/{idx}")
     /*뒤에 / 하고 받아올 변수 지정
-    * @PathVariable
-    * 장점은 client (jsp) 에서 변수를 지정 할 필요가 없음
-    * */
+     * @PathVariable
+     * 장점은 client (jsp) 에서 변수를 지정 할 필요가 없음
+     * */
     public String boardDelete(@PathVariable("idx") int idx) {
         System.out.println("idx = " + idx);
         boardMapper.boardDelete(idx);
 
+
+        return "redirect:/boardList.do";
+    }
+
+
+    @GetMapping("/boardUpdateForm.do/{idx}")
+    public String boardUpdateForm(@PathVariable("idx") int idx, Model model) {
+
+        Board board = boardMapper.boardContent(idx);
+
+        model.addAttribute("board", board);
+
+        return "boardUpdate";
+    }
+
+    @PostMapping("/boardUpdate.do")
+    public String boardUpdate(Board board) { // idx, title, contents 넘어오는데 세개를 VO로 가져오면 됨
+        System.out.println("Test.boardUpdate");
+        boardMapper.boardUpdate(board); // 수정 성공
 
         return "redirect:/boardList.do";
     }
