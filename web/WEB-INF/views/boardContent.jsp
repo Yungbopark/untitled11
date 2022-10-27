@@ -33,6 +33,10 @@
                     <td><input type="text" name="writer" class="form-control" value="${board.writer}"/></td>
                 </tr>
                 <tr>
+                    <td>작성일</td>
+                    <td>${fn:split(board.indate," ")[0]}/td>
+                </tr>
+                <tr>
                     <td colspan="2">
                         <button type="submit" class="btn btn-success btn-sm">수정</button>
                         <button type="reset" class="btn btn-warning btn-sm">취소</button>
