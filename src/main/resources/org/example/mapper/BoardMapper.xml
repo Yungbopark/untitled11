@@ -15,4 +15,8 @@
     <select id="boardContent" resultType="org.example.entity.Board">
         select * from tb_board where idx = #{idx}
     </select>
+
+    <delete id="boardDelete" parameterType="int">
+        delete from tb_board where idx = #{idx}
+    </delete>
 </mapper>

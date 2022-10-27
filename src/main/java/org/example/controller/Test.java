@@ -6,6 +6,7 @@ import org.example.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,7 +63,7 @@ public class Test {
 
     }
 
-    @RequestMapping("boardContent.do")
+    @RequestMapping("/boardContent.do")
     public String boardContent(@RequestParam("idx") int idx, Model model) {
         Board board = boardMapper.boardContent(idx);
         model.addAttribute("board", board);
@@ -70,6 +71,19 @@ public class Test {
         System.out.println("board.getContents() = " + board.getContents());
                 
         return "boardContent";
+    }
+
+    @RequestMapping("/boardDelete.do/{idx}")
+    /*뒤에 / 하고 받아올 변수 지정
+    * @PathVariable
+    * 장점은 client (jsp) 에서 변수를 지정 할 필요가 없음
+    * */
+    public String boardDelete(@PathVariable("idx") int idx) {
+        System.out.println("idx = " + idx);
+        boardMapper.boardDelete(idx);
+
+
+        return "redirect:/boardList.do";
     }
 
 }
