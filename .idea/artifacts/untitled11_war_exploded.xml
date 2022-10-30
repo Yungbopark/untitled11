@@ -2,10 +2,9 @@
   <artifact type="exploded-war" name="untitled11:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/untitled11_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="untitled11/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="untitled11" />
+          <element id="module-output" name="SpringMVC02" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
@@ -35,8 +34,12 @@
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:3.4.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.8" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.8" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="SpringMVC02/web/Web" />
     </root>
   </artifact>
 </component>

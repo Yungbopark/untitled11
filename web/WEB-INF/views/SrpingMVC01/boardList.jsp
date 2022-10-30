@@ -35,7 +35,7 @@
             <td>${vo.idx}</td>
             <td><a href="boardContent.do?idx=${vo.idx}">${vo.title}</a></td>
             <td>${vo.writer}</td>
-            <td>${vo.indate}</td>
+            <td>${fn:split(vo.indate," ")[0]}</td>
             <td>${vo.count}</td>
             </tr>
         </tbody>

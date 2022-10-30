@@ -1,7 +1,6 @@
-package org.example.controller;
+package org.example.controller.SpringMVC01;
 
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.example.entity.Board;
 import org.example.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+/*@Controller*/
 public class Test {
 
 
@@ -31,7 +30,7 @@ public class Test {
 
         List<Board> list = boardMapper.getLists();
         model.addAttribute("list", list);
-        return "boardList";
+        return "SrpingMVC01/boardList";
 
 
         /*mybatis mapper  인식 불가 해결
@@ -51,7 +50,7 @@ public class Test {
 
     @RequestMapping("/boardForm.do")
     public String boardForm() {
-        return "boardForm";
+        return "SrpingMVC01/boardForm";
     }
 
     @PostMapping("/boardInsert.do")
@@ -62,13 +61,13 @@ public class Test {
     }
 
     @RequestMapping("/boardContent.do")
-    public String boardContent(@RequestParam("idx") int idx, Model model) {
+    public String boardContent(/*@RequestParam("idx")*/
+                                /*annotation 생략도 가능 */int idx, Model model) {
         Board board = boardMapper.boardContent(idx);
         model.addAttribute("board", board);
-
-        System.out.println("board.getContents() = " + board.getContents());
-
-        return "boardContent";
+        //조회수 증가
+        boardMapper.boardCount(idx);
+        return "SrpingMVC01/boardContent";
     }
 
     @RequestMapping("/boardDelete.do/{idx}")
@@ -92,7 +91,7 @@ public class Test {
 
         model.addAttribute("board", board);
 
-        return "boardUpdate";
+        return "SrpingMVC01/boardUpdate";
     }
 
     @PostMapping("/boardUpdate.do")
