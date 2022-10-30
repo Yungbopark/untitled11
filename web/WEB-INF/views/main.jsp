@@ -8,7 +8,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        function makeView(data) { // data=[{},{},{},,,,]
+    function goInsert() {
+            /*parameter 세개 가져와서 서버로 전달 */
+            /*
+                        let title = $("#title").val();
+                        let contents = $("#contents").val();
+                        let writer = $("#writer").val();
+            */
+            let fData = $("#frm").serialize();
+            /*form에 있는 모든 parameter를 가져옴*/
+            $.ajax({
+                url: "boardInsert.do",
+                type: "post",
+                data: fData,
+                success: loadList,
+                error: function () {
+                    alert("error");
+                }
+            });
+            // form 초기화
+        $("#title").val("");
+        $("#contents").val("");
+        $("#writer").val("");
+
+        }
+
+    function makeView(data) { // data=[{},{},{},,,,]
             var listHtml = "<table class='table table-bordered'>";
                 listHtml += "<tr>";
                 listHtml += "<td>번호</td>";
@@ -26,10 +51,28 @@
                 listHtml += "<td>"+obj.count+"</td>";
                 listHtml += "</tr>";
             });
+
+            listHtml += "<tr>";
+            listHtml += "<td colspan='5'>";
+            listHtml += "<button class='btn btn-primary btn-sm' onclick='goForm()'>글쓰기</button>";
+            listHtml += "</td>";
+            listHtml += "</tr>";
             listHtml += "</table>";
             $("#view").html(listHtml);
-        }
 
+        $("#view").css("display", "block");
+        $("#writeForm").css("display", "none");
+
+
+        }
+        function goForm() {
+            $("#view").css("display", "none");
+            $("#writeForm").css("display", "block");
+        }
+        function goList() {
+            $("#view").css("display", "block");
+            $("#writeForm").css("display", "none");
+        }
         function loadList() {
             /*서버와의 통신
             * 게시판 리스트 가져오기*/
@@ -59,6 +102,33 @@
     <div class="panel panel-default">
         <div class="panel-heading">BOARD</div>
         <div class="panel-body" id="view"></div>
+        <div class="panel-body" id="writeForm" style="display: none">
+            <form id="frm" method="post">
+                <table class="table">
+                    <tr>
+                        <td>제목</td>
+                        <td><input type="text" id="title" name="title" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                        <td><textarea rows="7" id="contents" class="form-control" name="contents"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>작성자</td>
+                        <td><input type="text" id="writer" name="writer" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="button" class="btn btn-success btn-sm" onclick="goInsert()">등록</button>
+                            <%--등록버튼을 누르면 데이터 비동기 전송 되도록--%>
+                            <button type="reset" class="btn btn-warning btn-sm">취소</button>
+                            <button type="button" class="btn btn-warning btn-sm">취소</button>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
         <div class="panel-footer">footer area</div>
     </div>
 </div>
