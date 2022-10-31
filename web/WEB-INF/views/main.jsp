@@ -27,10 +27,10 @@
                 }
             });
             // form 초기화
-        $("#title").val("");
+        /*$("#title").val("");
         $("#contents").val("");
-        $("#writer").val("");
-
+        $("#writer").val("");*/
+        $("#formClear").trigger("click");
         }
 
     function makeView(data) { // data=[{},{},{},,,,]
@@ -45,26 +45,40 @@
             $.each(data, function (index,obj) {
                 listHtml += "<tr>";
                 listHtml += "<td>"+obj.idx+"</td>";
-                listHtml += "<td>"+obj.title+"</td>";
+                listHtml += "<td><a href='javascript:goContents("+obj.idx+")'>"+obj.title+"</a></td>";
                 listHtml += "<td>"+obj.writer+"</td>";
                 listHtml += "<td>"+obj.indate+"</td>";
                 listHtml += "<td>"+obj.count+"</td>";
                 listHtml += "</tr>";
+
+                listHtml += "<tr id='c"+obj.idx+"' style='display: none'>";
+                listHtml += "<td>내용</td>";
+                listHtml += "<td colspan='4'>";
+                listHtml += "<textarea rows='7' class='form-control'>"+obj.contents+"</textarea>";
+                listHtml += "</td>";
+                listHtml += "</tr>";
+
             });
 
-            listHtml += "<tr>";
-            listHtml += "<td colspan='5'>";
-            listHtml += "<button class='btn btn-primary btn-sm' onclick='goForm()'>글쓰기</button>";
-            listHtml += "</td>";
-            listHtml += "</tr>";
-            listHtml += "</table>";
-            $("#view").html(listHtml);
+                listHtml += "<tr>";
+                listHtml += "<td colspan='5'>";
+                listHtml += "<button class='btn btn-primary btn-sm' onclick='goForm()'>글쓰기</button>";
+                listHtml += "</td>";
+                listHtml += "</tr>";
+                listHtml += "</table>";
+                $("#view").html(listHtml);
 
         $("#view").css("display", "block");
         $("#writeForm").css("display", "none");
 
 
         }
+        
+        function goContents(idx) {
+            $("#c" + idx).css("display", "table-row");
+            
+        }
+        
         function goForm() {
             $("#view").css("display", "none");
             $("#writeForm").css("display", "block");
@@ -121,7 +135,7 @@
                         <td colspan="2">
                             <button type="button" class="btn btn-success btn-sm" onclick="goInsert()">등록</button>
                             <%--등록버튼을 누르면 데이터 비동기 전송 되도록--%>
-                            <button type="reset" class="btn btn-warning btn-sm">취소</button>
+                            <button type="reset" class="btn btn-warning btn-sm" id="formClear">취소</button>
                             <button type="button" class="btn btn-warning btn-sm">취소</button>
                         </td>
                     </tr>
