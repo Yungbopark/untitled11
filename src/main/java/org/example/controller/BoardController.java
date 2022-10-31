@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -34,9 +35,16 @@ public class BoardController {
     }
 
     @PostMapping("/boardInsert.do")
-    public @ResponseBody void boardInsert(Board vo) {
+    public @ResponseBody
+    void boardInsert(Board vo) {
         boardMapper.boardInsert(vo);
         /*insert가 끝나면 @ResponseBody annotation으로 제어권을 넘겨줘야 함*/
 
+    }
+
+    @RequestMapping("/boardDelete.do")
+    public @ResponseBody void boardDelete(@RequestParam("idx") int idx) {
+
+        boardMapper.boardDelete(idx);
     }
 }

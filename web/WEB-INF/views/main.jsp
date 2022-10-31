@@ -54,7 +54,10 @@
                 listHtml += "<tr id='c"+obj.idx+"' style='display: none'>";
                 listHtml += "<td>내용</td>";
                 listHtml += "<td colspan='4'>";
-                listHtml += "<textarea rows='7' class='form-control'>"+obj.contents+"</textarea>";
+                listHtml += "<textarea rows='7' class='form-control' readonly>"+obj.contents+"</textarea>";
+                listHtml += "<br/>";
+                listHtml += "<button class='btn btn-success btn-sm'>수정화면</button>&nbsp;";
+                listHtml += "<button class='btn btn-warning btn-sm' onclick='goDelete("+obj.idx+")'>삭제</button>";
                 listHtml += "</td>";
                 listHtml += "</tr>";
 
@@ -75,7 +78,12 @@
         }
         
         function goContents(idx) {
-            $("#c" + idx).css("display", "table-row");
+            if ($("#c"+idx).css("display")=="none") {
+                $("#c" + idx).css("display", "table-row");
+            } else {
+                $("#c" + idx).css("display", "none");
+            }
+
             
         }
         
@@ -98,6 +106,18 @@
                 /*ajax 문법 주의 함수 호출 할때 ()붙이면 안됨*/
                 error: function () {alert("error!");}});
         }
+
+    function goDelete(idx) {
+
+        $.ajax({
+            url: "boardDelete.do",
+            type: "get",
+            data: {"idx": idx},
+            success: loadList,
+            error: function () {
+                alert("error!");}
+        });
+    }
 
         $(document).ready(function () {
             loadList();
