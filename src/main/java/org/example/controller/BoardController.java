@@ -49,8 +49,22 @@ public class BoardController {
     }
 
     @RequestMapping("/boardUpdate.do")
-    public @ResponseBody
-    void boardUpdate(Board vo) {
+    public @ResponseBody void boardUpdate(Board vo) {
         boardMapper.boardUpdate(vo);
+    }
+
+    @RequestMapping("/boardContent.do")
+    public @ResponseBody Board boardContent(int idx) {
+        Board board = boardMapper.boardContent(idx);
+
+        return board;
+    }
+
+    @RequestMapping("/boardCount.do")
+    public @ResponseBody Board boardCount(int idx) {
+
+        Board board =  boardMapper.boardCount(idx);
+
+        return board;
     }
 }

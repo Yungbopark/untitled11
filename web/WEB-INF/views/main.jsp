@@ -48,13 +48,13 @@
                 listHtml += "<td id='t"+obj.idx+"'><a href='javascript:goContents("+obj.idx+")'>"+obj.title+"</a></td>";
                 listHtml += "<td>"+obj.writer+"</td>";
                 listHtml += "<td>"+obj.indate+"</td>";
-                listHtml += "<td>"+obj.count+"</td>";
+                listHtml += "<td id='cnt"+obj.idx+"'"+obj.count+"></td>";
                 listHtml += "</tr>";
 
                 listHtml += "<tr id='c"+obj.idx+"' style='display: none'>";
                 listHtml += "<td>내용</td>";
                 listHtml += "<td colspan='4'>";
-                listHtml += "<textarea rows='7' id='ta"+obj.idx+"' class='form-control' readonly>"+obj.contents+"</textarea>";
+                listHtml += "<textarea rows='7' id='ta"+obj.idx+"' class='form-control' readonly></textarea>";
                 listHtml += "<br/>";
                 listHtml += "<span id='ub"+obj.idx+"'><button class='btn btn-success btn-sm' onclick='goUpdateForm("+obj.idx+")'>수정화면</button></span>&nbsp;";
                 listHtml += "<button class='btn btn-warning btn-sm' onclick='goDelete("+obj.idx+")'>삭제</button>";
@@ -108,10 +108,42 @@
 
         function goContents(idx) {
             if ($("#c"+idx).css("display")=="none") {
+
+
+                /*상세보기를 title 찍었을 때 가져오도록 구현*/
+                $.ajax({
+                    url : "boardContent.do",
+                    type : "get",
+                    data : {"idx": idx},
+                    dataType: "json",
+                    success : function (data) { //jason 데이터가 날아온다. 데이터 중에 "contents" 만 뽑아냄
+                        $("#ta" + idx).val(data.contents);
+                    },
+                    error : function () {
+                        alert("error!");
+                    }
+                });
+
                 $("#c" + idx).css("display", "table-row");
                 $("#ta" + idx).attr("readonly", true);
+
             } else {
+                /*title 이 닫힐 때 count + 1 한다*/
                 $("#c" + idx).css("display", "none");
+                $.ajax({
+                    url : "boardContent.do",
+                    type : "get",
+                    data : {"idx":idx},
+                    dataType : "json",
+                    success: function (data) {
+                        $("#cnt" + idx).val(data.count);
+
+                    },
+                    error: function () {
+                        alert("error!");
+                    }
+
+                })
             }
 
             
