@@ -62,9 +62,9 @@ public class BoardController {
 
     @RequestMapping("/boardCount.do")
     public @ResponseBody Board boardCount(int idx) {
-
         Board board =  boardMapper.boardCount(idx);
-
+        /*리턴 값을 못 받아 오는 듯*/
+        /*annotation 으로 쿼리를 적으면, 리턴 값을 어떻게 설정 하는지 찾아보자*/
         return board;
     }
 }
