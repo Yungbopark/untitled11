@@ -80,14 +80,31 @@
         function goUpdateForm(idx) { //
             $("#ta" + idx).attr("readonly", false);
             var title = $("#t"+idx).text();
-            var newInput = "<input type='text' class='form-control' value='"+title+"'/>";
+            var newInput = "<input type='text' id='nt"+idx+"' class='form-control' value='"+title+"'/>";
 
             $("#t" + idx).html(newInput);
 
-            var newButton = "<button class='btn btn-primary btn-sm'>수정</button>";
+            var newButton = "<button class='btn btn-primary btn-sm' onclick='goUpdate("+idx+")'>수정</button>";
             $("#ub" + idx).html(newButton);
                     }
 
+        function goUpdate(idx) {
+
+            var title = $("#nt"+idx).val();
+            var contents = $("#ta" + idx).val();
+
+            $.ajax({
+                url : "boardUpdate.do",
+                type : "post",
+                data : {"idx":idx, "title":title, "contents":contents},
+                success : loadList,
+                error: function () {
+                    alert("error");
+                }
+            })
+
+
+        }
 
         function goContents(idx) {
             if ($("#c"+idx).css("display")=="none") {
