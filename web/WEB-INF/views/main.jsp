@@ -18,7 +18,7 @@
             let fData = $("#frm").serialize();
             /*form에 있는 모든 parameter를 가져옴*/
             $.ajax({
-                url: "boardInsert.do",
+                url: "board/new",
                 type: "post",
                 data: fData,
                 success: loadList,
@@ -94,9 +94,10 @@
             var contents = $("#ta" + idx).val();
 
             $.ajax({
-                url : "boardUpdate.do",
-                type : "post",
-                data : {"idx":idx, "title":title, "contents":contents},
+                url : "board/update",
+                type : "put",
+                contentType:'application/json;charset=utf-8',
+                data : JSON.stringify({"idx":idx, "title":title, "contents":contents}),
                 success : loadList,
                 error: function () {
                     alert("error");
@@ -112,7 +113,7 @@
 
                 /*상세보기를 title 찍었을 때 가져오도록 구현*/
                 $.ajax({
-                    url : "boardContent.do",
+                    url : "board/"+idx,
                     type : "get",
                     data : {"idx": idx},
                     dataType: "json",
@@ -131,8 +132,8 @@
                 /*title 이 닫힐 때 count + 1 한다*/
                 $("#c" + idx).css("display", "none");
                 $.ajax({
-                    url : "boardCount.do",
-                    type : "get",
+                    url : "board/count/"+idx,
+                    type : "put",
                     data : {"idx":idx},
                     dataType : "json",
                     success: function (data) {
@@ -162,7 +163,7 @@
             /*서버와의 통신
             * 게시판 리스트 가져오기*/
             $.ajax({
-                url : "boardList.do",
+                url : "board/all",
                 type : "get",
                 dataType : "json",
                 success : makeView,
@@ -173,9 +174,8 @@
     function goDelete(idx) {
 
         $.ajax({
-            url: "boardDelete.do",
-            type: "get",
-            data: {"idx": idx},
+            url: "board/"+idx,
+            type: "delete",
             success: loadList,
             error: function () {
                 alert("error!");}
