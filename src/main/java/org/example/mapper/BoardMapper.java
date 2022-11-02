@@ -17,5 +17,5 @@ public interface BoardMapper {
     @Update("update tb_board set count=count+1 where idx=#{idx}")
     // Mybatis 제공 annotation
     // Mapper interface와 mapper.xml파일을 이용하는 방식과 동시 사용 할 수 있음
-    public Board boardCount(int idx);
+    public void boardCount(int idx);
 }

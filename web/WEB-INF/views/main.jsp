@@ -136,8 +136,8 @@
                     data : {"idx":idx},
                     dataType : "json",
                     success: function (data) {
-                        alert(data.count);
                         $("#cnt" + idx).val(data.count);
+                        loadList();
 
                     },
                     error: function () {
