@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.MemberMapper">
+
+    <select id="registerCheck" resultType="org.example.entity.Member">
+        select * from mem_tbl where memId = #{memId}
+    </select>
+
+    <insert id="memberRegister" parameterType="org.example.entity.Member">
+
+        insert into mem_tbl (memID, memPassword, memName, memAge, memGender, memEmail, memProfile)
+        values (#{memID},
+                #{memPassword},
+                #{memName},
+                #{memAge},
+                #{memGender},
+                #{memEmail},
+                #{memProfile})
+
+    </insert>
+
+
+    <select id="memberLogin" parameterType="org.example.entity.Member" resultType="org.example.entity.Member">
+        select * from mem_tbl where memID = #{memID} and memPassword = #{memPassword}
+    </select>
+</mapper>
