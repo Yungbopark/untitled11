@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,6 +196,7 @@
 <body>
 
 <div class="container">
+    <jsp:include page="../common/header.jsp"/>
     <h2>Spring MVC01</h2>
     <div class="panel panel-default">
         <div class="panel-heading">BOARD</div>
@@ -226,6 +228,8 @@
                 </table>
             </form>
         </div>
+        <%--실패 메시지--%>
+
         <div class="panel-footer">footer area</div>
     </div>
 </div>
