@@ -25,4 +25,13 @@
     <select id="memberLogin" parameterType="org.example.entity.Member" resultType="org.example.entity.Member">
         select * from mem_tbl where memID = #{memID} and memPassword = #{memPassword}
     </select>
+
+
+    <update id="memUpdate" parameterType="org.example.entity.Member">
+        update mem_tbl set memPassword =#{memPassword},
+        memName = #{memName},
+        memAge = #{memAge},
+        memEmail = #{memEmail}
+        where memID = #{memID}
+    </update>
 </mapper>

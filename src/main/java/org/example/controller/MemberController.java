@@ -125,4 +125,45 @@ public class MemberController {
 
         return "member/memUpdateForm";
     }
-}
+
+    @RequestMapping("/memUpdate.do") //회원정보수정
+    public String memUpdate(Member member, RedirectAttributes rttr, String memPassword1, String memPassword2, HttpSession session) {
+
+        if (member.getMemID() == null || member.getMemID().equals("") ||
+                memPassword1 == null || memPassword1.equals("") ||
+                memPassword2 == null || memPassword2.equals("") ||
+                member.getMemEmail() == null || member.getMemEmail().equals("") ||
+                member.getMemName() == null || member.getMemName().equals("") ||
+                member.getMemAge() == 0 ||
+                member.getMemGender() == null || member.getMemGender().equals("")) {
+
+            // 누락 메시지를 가지고 가야 함 객체바인딩 (Model, httpServletRequest, HttpSession)
+            rttr.addFlashAttribute("msgType", "누락 메시지");
+            rttr.addFlashAttribute("msg", "모든 내용을 입력하세요.");
+            // FlashAttribute -> 객체를 한 번만 바인딩 한다
+            return "redirect:/memUpdateForm.do";
+
+        }
+        if (!memPassword1.equals(memPassword2)) {
+            rttr.addFlashAttribute("msgType", "비밀번호 오류 메시지");
+            rttr.addFlashAttribute("msg", "비밀번호가 서로 다릅니다.");
+            return "redirect:/memUpdateForm.do";
+        }
+        int result = memberMapper.memUpdate(member);
+        // 성공 실패 여부에 따라 메시지를 다르게 보내기 위해서 결과 값을 받음
+
+        if (result == 1) { //수정 성공 메시지
+            rttr.addFlashAttribute("msgType", "성공 메시지");
+            rttr.addFlashAttribute("msg", "회원 정보 수정에 성공했습니다.");
+            // 되돌아가기 전에 회원가입이 성공하면, 로그인 처리하기
+            // session을 만들고 그 session 에 setAttribute 함
+            session.setAttribute("mvo", member);
+            return "redirect:/"; // root ("/") 첫페이지로 감
+        } else {
+            rttr.addFlashAttribute("msgType", "실패 메시지");
+            rttr.addFlashAttribute("msg", "회원 정보 수정에 실패 했습니다.");
+            return "redirect:/memJoin.do";
+        }
+    }
+    }
+
