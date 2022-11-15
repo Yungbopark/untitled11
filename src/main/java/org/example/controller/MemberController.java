@@ -128,7 +128,9 @@ public class MemberController {
 
     @RequestMapping("/memUpdate.do") //회원정보수정
     public String memUpdate(Member member, RedirectAttributes rttr, String memPassword1, String memPassword2, HttpSession session) {
-
+            /*이쪽 검증 하는 부분 다시 봐야 됨
+            * 비밀번호를 안 누르고 수정 눌러도 페이지 넘어감
+            * 원래는 msgType :  누락 메시지 나와야 하는데....*/
         if (member.getMemID() == null || member.getMemID().equals("") ||
                 memPassword1 == null || memPassword1.equals("") ||
                 memPassword2 == null || memPassword2.equals("") ||
@@ -162,7 +164,7 @@ public class MemberController {
         } else {
             rttr.addFlashAttribute("msgType", "실패 메시지");
             rttr.addFlashAttribute("msg", "회원 정보 수정에 실패 했습니다.");
-            return "redirect:/memJoin.do";
+            return "redirect:/memUpdateForm.do";
         }
     }
     }
