@@ -116,6 +116,13 @@ public class MemberController {
 
             return "redirect:/memLoginForm.do";
         }
+    }
 
+    // 회원정보수정화면
+    @RequestMapping("/memUpdateFrom.do")
+    public String memUpdateFrom() {
+
+
+        return "member/memUpdateForm";
     }
 }

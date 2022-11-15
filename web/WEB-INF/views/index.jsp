@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,11 +38,35 @@
         <h3>SpringMVC03</h3>
     </c:if>
     <c:if test="${!empty mvo}">
-        <h3>${mvo.memName}님 방문을 환영합니다.</h3>
+        <label>${mvo.memName}님 방문을 환영합니다.</label>
     </c:if>
-
-    <%--톰캣을 최초 실행했을 때도 mvo가 비어있지 않은 것으로 나옴--%>
-    <%--어디선가 mvo를 한 번 비워줘야 될듯--%>
+    <div class="panel panel-default">
+        <div>
+            <img src="${contextPath}" style="width: 100%; height: 400px;">
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+                <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <h3>HOME</h3>
+                    <p>Some content.</p>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                    <h3>게시판</h3>
+                    <p>Some content in menu 1.</p>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <h3>공지사항</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">footer area</div>
+    </div>
 
     <p></p>
 </div>
