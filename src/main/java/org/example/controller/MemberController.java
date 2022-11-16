@@ -176,5 +176,15 @@ public class MemberController {
 
         return "member/memImageForm";
     }
+
+    // 회원사진 이미지 업로드 (upload, DB저장)
+    @RequestMapping("/memImageUpdate.do")
+    public String memImageUpdate() {
+        // 파일업로드 API (cos.jar, 3가지)
+
+
+        return "";
+    }
+
     }
 
