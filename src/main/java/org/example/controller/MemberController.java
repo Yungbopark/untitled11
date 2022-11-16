@@ -119,8 +119,8 @@ public class MemberController {
     }
 
     // 회원정보수정화면
-    @RequestMapping("/memUpdateFrom.do")
-    public String memUpdateFrom() {
+    @RequestMapping("/memUpdateForm.do")
+    public String memUpdateForm() {
 
 
         return "member/memUpdateForm";
@@ -128,6 +128,10 @@ public class MemberController {
 
     @RequestMapping("/memUpdate.do") //회원정보수정
     public String memUpdate(Member member, RedirectAttributes rttr, String memPassword1, String memPassword2, HttpSession session) {
+
+        System.out.println("member = " + member);
+        System.out.println("memPassword1 = " + memPassword1);
+        System.out.println("memPassword2 = " + memPassword2);
             /*이쪽 검증 하는 부분 다시 봐야 됨
             * 비밀번호를 안 누르고 수정 눌러도 페이지 넘어감
             * 원래는 msgType :  누락 메시지 나와야 하는데....*/

@@ -76,7 +76,7 @@
           </tr>
           <tr>
             <td style="width: 110px; vertical-align: middle" >비밀번호</td>
-            <td colspan="2"><input class="form-control" type="password1" name="memPassword1" id="memPassword1" maxlength="20" placeholder="비밀번호를 입력 하세요."/></td>
+            <td colspan="2"><input class="form-control" type="password" name="memPassword1" id="memPassword1" maxlength="20" placeholder="비밀번호를 입력 하세요."/></td>
           </tr>
           <tr>
             <td style="width: 110px; vertical-align: middle" >비밀번호 확인</td>
