@@ -170,6 +170,11 @@ public class MemberController {
             rttr.addFlashAttribute("msg", "회원 정보 수정에 실패 했습니다.");
             return "redirect:/memUpdateForm.do";
         }
+        }
+    @RequestMapping("/memImageForm.do")
+    public String memImageForm(){
+
+        return "member/memImageForm";
     }
     }
 
