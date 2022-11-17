@@ -39,10 +39,10 @@
     </c:if>
     <c:if test="${!empty mvo}">
         <label><c:if test="${mvo.memProfile eq ''}">
-            <img src="${contextPath}/static/images/person.png" style="width: 50px; height: 50px;"><img>
+            <img src="${contextPath}/static/images/person.png" style="width: 50px; height: 50px;">
                </c:if>
-                <c:if test="${!mvo.profile eq ''}">
-                    <img src="${contextPath}/static/upload/#{mvo.memProfile}" style="width: 50px; height: 50px;"><img>
+    <c:if test="${!mvo.memProfile eq ''}">
+            <img src="${contextPath}/static/upload/${mvo.memProfile}" style="width: 50px; height: 50px;">
                 </c:if>
                 ${mvo.memName}님 방문을 환영합니다.</label>
     </c:if>

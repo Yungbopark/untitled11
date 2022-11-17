@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import org.example.entity.Member;
 import org.example.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -73,7 +76,8 @@ public class MemberController {
     }
 
     @RequestMapping("/memRegisterCheck.do")
-    public @ResponseBody int memRegisterCheck(@RequestParam("memId") String memId) {
+    public @ResponseBody
+    int memRegisterCheck(@RequestParam("memId") String memId) {
         Member member = memberMapper.registerCheck(memId);
         if (member != null || memId.equals("")) {
             return 0; //이미 존재하는 회원 || 입력 불가 (공백)
@@ -132,9 +136,9 @@ public class MemberController {
         System.out.println("member = " + member);
         System.out.println("memPassword1 = " + memPassword1);
         System.out.println("memPassword2 = " + memPassword2);
-            /*이쪽 검증 하는 부분 다시 봐야 됨
-            * 비밀번호를 안 누르고 수정 눌러도 페이지 넘어감
-            * 원래는 msgType :  누락 메시지 나와야 하는데....*/
+        /*이쪽 검증 하는 부분 다시 봐야 됨
+         * 비밀번호를 안 누르고 수정 눌러도 페이지 넘어감
+         * 원래는 msgType :  누락 메시지 나와야 하는데....*/
         if (member.getMemID() == null || member.getMemID().equals("") ||
                 memPassword1 == null || memPassword1.equals("") ||
                 memPassword2 == null || memPassword2.equals("") ||
@@ -170,21 +174,33 @@ public class MemberController {
             rttr.addFlashAttribute("msg", "회원 정보 수정에 실패 했습니다.");
             return "redirect:/memUpdateForm.do";
         }
-        }
+    }
+
     @RequestMapping("/memImageForm.do")
-    public String memImageForm(){
+    public String memImageForm() {
 
         return "member/memImageForm";
     }
 
     // 회원사진 이미지 업로드 (upload, DB저장)
     @RequestMapping("/memImageUpdate.do")
-    public String memImageUpdate() {
+    public String memImageUpdate(HttpServletRequest request, RedirectAttributes rttr) {
         // 파일업로드 API (cos.jar, 3가지)
-
-
+        MultipartRequest multi = null;
+        int fileMaxSize = 10 * 1024 * 1024; // 10MB
+        //업로드 할 경로 지정 // 실제 업로드 할 path 를 가져온다
+        String path = "/Users/jungwoopark/IdeaProjects/untitled11/web/static/upload";
+        //request.getRealPath("resources/upload");
+        try {
+            // 이미지 업로드
+            multi = new MultipartRequest(request, path, fileMaxSize, "UTF-8", new DefaultFileRenamePolicy());
+        } catch (Exception e) {
+            e.printStackTrace();
+            rttr.addFlashAttribute("msgType", "실패 메시지");
+            rttr.addFlashAttribute("msg", "파일 용량 초과");
+            return "redirect:/memImageForm.do";
+        }
         return "";
     }
-
-    }
+}
 
