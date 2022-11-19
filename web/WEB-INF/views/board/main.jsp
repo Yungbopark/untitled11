@@ -56,9 +56,15 @@
                 listHtml += "<td>내용</td>";
                 listHtml += "<td colspan='4'>";
                 listHtml += "<textarea rows='7' id='ta"+obj.idx+"' class='form-control' readonly></textarea>";
+                if("${mvo.memID}" == obj.memID) {
                 listHtml += "<br/>";
                 listHtml += "<span id='ub"+obj.idx+"'><button class='btn btn-success btn-sm' onclick='goUpdateForm("+obj.idx+")'>수정화면</button></span>&nbsp;";
                 listHtml += "<button class='btn btn-warning btn-sm' onclick='goDelete("+obj.idx+")'>삭제</button>";
+            } else {
+                    listHtml += "<br/>";
+                    listHtml += "<span id='ub"+obj.idx+"'><button disabled class='btn btn-success btn-sm' onclick='goUpdateForm("+obj.idx+")'>수정화면</button></span>&nbsp;";
+                    listHtml += "<button disabled class='btn btn-warning btn-sm' onclick='goDelete("+obj.idx+")'>삭제</button>";
+                }
                 listHtml += "</td>";
                 listHtml += "</tr>";
 
