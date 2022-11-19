@@ -63,12 +63,15 @@
                 listHtml += "</tr>";
 
             });
+                /*로그인을 해야 보이는 부분*/
+                if(${!empty mvo}) {
 
-                listHtml += "<tr>";
-                listHtml += "<td colspan='5'>";
-                listHtml += "<button class='btn btn-primary btn-sm' onclick='goForm()'>글쓰기</button>";
-                listHtml += "</td>";
-                listHtml += "</tr>";
+                    listHtml += "<tr>";
+                    listHtml += "<td colspan='5'>";
+                    listHtml += "<button class='btn btn-primary btn-sm' onclick='goForm()'>글쓰기</button>";
+                    listHtml += "</td>";
+                    listHtml += "</tr>";
+                }
                 listHtml += "</table>";
                 $("#view").html(listHtml);
 
@@ -203,6 +206,7 @@
         <div class="panel-body" id="view"></div>
         <div class="panel-body" id="writeForm" style="display: none">
             <form id="frm" method="post">
+                <input type="hidden" name="memID" id="memID" value="${mvo.memID}">
                 <table class="table">
                     <tr>
                         <td>제목</td>
@@ -214,7 +218,7 @@
                     </tr>
                     <tr>
                         <td>작성자</td>
-                        <td><input type="text" id="writer" name="writer" class="form-control"/></td>
+                        <td><input type="text" id="writer" name="writer" class="form-control" value="${mvo.memName}" readonly/></td>
                     </tr>
                     <tr>
                         <td colspan="2">

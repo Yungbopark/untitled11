@@ -34,18 +34,6 @@
 
 <div class="container">
     <jsp:include page="common/header.jsp"/>
-    <c:if test="${empty mvo}">
-        <h3>SpringMVC03</h3>
-    </c:if>
-    <c:if test="${!empty mvo}">
-        <label><c:if test="${mvo.memProfile eq ''}">
-            <img src="${contextPath}/static/images/person.png" style="width: 50px; height: 50px;">
-               </c:if>
-    <c:if test="${!mvo.memProfile eq ''}">
-            <img src="${contextPath}/static/upload/${mvo.memProfile}" style="width: 50px; height: 50px;">
-                </c:if>
-                ${mvo.memName}님 방문을 환영합니다.</label>
-    </c:if>
     <div class="panel panel-default">
         <div>
             <img src="${contextPath}" style="width: 100%; height: 400px;">

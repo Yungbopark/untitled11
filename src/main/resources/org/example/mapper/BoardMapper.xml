@@ -8,8 +8,8 @@
     </select>
 
     <insert id="boardInsert" parameterType="org.example.entity.Board">
-        insert into tb_board(title,contents,writer, count)
-        values(#{title},#{contents},#{writer}, 0)
+        insert into tb_board(memID ,title,contents,writer,count)
+        values(#{memID}, #{title}, #{contents}, #{writer}, 0)
     </insert>
 
     <select id="boardContent" resultType="org.example.entity.Board">

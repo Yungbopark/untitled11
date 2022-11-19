@@ -6,6 +6,7 @@ import lombok.Data;
 public class Board {
 
     private int idx;
+    private String memID;
     private String title;
     private String contents;
     private String writer;

@@ -34,4 +34,12 @@
         memEmail = #{memEmail}
         where memID = #{memID}
     </update>
+
+    <select id="getMember" resultType="org.example.entity.Member">
+        select * from mem_tbl where memID = #{memId}
+    </select>
+
+    <update id="memProfileUpdate" parameterType="org.example.entity.Member">
+        update mem_tbl set memProfile=#{memProfile} where memID = #{memID}
+    </update>
 </mapper>

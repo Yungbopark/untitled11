@@ -14,4 +14,8 @@ public interface MemberMapper {
     public Member memberLogin(Member member); //로그인체크
 
     public int memUpdate(Member member);
+
+    public Member getMember(String memberID);
+
+    public void memProfileUpdate(Member member);
 }
