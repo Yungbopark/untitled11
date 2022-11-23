@@ -39,7 +39,7 @@ public class MemberController {
                 memPassword2 == null || memPassword2.equals("") ||
                 member.getMemEmail() == null || member.getMemEmail().equals("") ||
                 member.getMemName() == null || member.getMemName().equals("") ||
-                member.getMemAge() == 0 ||
+                member.getMemAge() == 0 || member.getAuthList().size() == 0 ||
                 member.getMemGender() == null || member.getMemGender().equals("") ||
                 member.getMemEmail() == null || member.getMemEmail().equals("")) {
 
@@ -57,6 +57,7 @@ public class MemberController {
         }
         member.setMemProfile(""); // 사진 이미지
         // 회원을 테이블에 저장
+        // 추가 : 비밀번호 암호화하기 (
         int result = memberMapper.memberRegister(member);
         // 성공 실패 여부에 따라 메시지를 다르게 보내기 위해서 결과 값을 받음
         System.out.println("result = " + result);

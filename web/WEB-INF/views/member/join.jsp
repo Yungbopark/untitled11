@@ -139,6 +139,16 @@
             <td colspan="2"><input class="form-control" type="text" name="memEmail" id="memEmail" maxlength="20" placeholder="이메일을 입력하세요."/></td>
           </tr>
           <tr>
+            <td style="width: 110px; vertical-align: middle">사용자 권한</td>
+            <td colspan="2">
+              <%--사용자 권한 선택하는 체크박스--%>
+              <input type="checkbox" name="authList[0].auth" value="ROLE_USER"> ROLE_USER
+              <input type="checkbox" name="authList[1].auth" value="ROLE_MANAGER"> ROLE_MANAGER
+              <input type="checkbox" name="authList[2].auth" value="ROLE_ADMIN"> ROLE_ADMIN
+              </td>
+          </tr>
+
+          <tr>
             <td colspan="3" style="text-align: left;">
               <span id="passMessage"></span>
               <input type="button" class="btn btn-primary btn-sm pull-right" value="등록" onclick="ageCheck()"/>
